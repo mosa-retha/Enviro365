@@ -3,16 +3,16 @@ package com.enviro.assessment.grad001.MosaMoime.Enviro.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WasteCategories {
+public class WasteCategory {
 
     private String id;
     private String category;
     private String description;
 
-    public WasteCategories() {
+    public WasteCategory() {
     }
 
-    public WasteCategories(String id, String category, String description) {
+    public WasteCategory(String id, String category, String description) {
         this.id = id;
         this.category = category;
         this.description = description;
