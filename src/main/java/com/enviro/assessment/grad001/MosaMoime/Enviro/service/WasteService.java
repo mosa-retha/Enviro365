@@ -1,45 +1,47 @@
 package com.enviro.assessment.grad001.MosaMoime.Enviro.service;
 
+import com.enviro.assessment.grad001.MosaMoime.Enviro.Repository.WasteRespostory;
 import com.enviro.assessment.grad001.MosaMoime.Enviro.model.WasteCategory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.random.RandomGenerator;
 
 @Service
 public class WasteService {
     // placeholder for the database
-    private ArrayList<WasteCategory> db = new ArrayList<>();
+
+    private WasteRespostory wasteRespostory;
+    @Autowired
+    public WasteService(WasteRespostory wasteRespostory){
+        this.wasteRespostory = wasteRespostory;
+    }
 
     public WasteService(){
-        db.add(new WasteCategory(1, "Plastic", "Plastic waste", "Waste"));
-        db.add(new WasteCategory(2, "Paper", "Paper waste", "Waste"));
-        db.add(new WasteCategory(3, "Glass", "Glass waste", "Waste"));
-        db.add(new WasteCategory(4, "Metal", "Metal waste", "Waste"));
-        db.add(new WasteCategory(5, "Organic", "Organic waste", "Disposal"));
-        db.add(new WasteCategory(6, "E-waste", "Electronic waste", "Disposal"));
+     }
+
+
+    public Iterable<WasteCategory> getWasteServiceCategories(){
+        return wasteRespostory.findAll();
     }
 
-
-    public List<WasteCategory> getWasteServiceCategories(){
-        return db;
-    }
-
-    public WasteCategory getWasteServiceCategory(int id){
-        return db.get(id);
+    public WasteCategory getWasteServiceCategory(Integer id){
+        return wasteRespostory.findById(id).orElse(null);
     }
 
     public void addWasteServiceCategory(WasteCategory wasteCategory){
-        wasteCategory.setId(db.size() + 1);
-        db.add(wasteCategory);
+        wasteRespostory.save(wasteCategory);
     }
 
-    public void deleteWasteServiceCategory(int id){
-        db.remove(id);
+    public void deleteWasteServiceCategory(Integer id){
+        wasteRespostory.deleteById(id);
     }
 
-    public void updateWasteServiceCategory(int id, WasteCategory wasteCategory){
-        db.set(id, wasteCategory);
+    public void updateWasteServiceCategory(Integer id, WasteCategory wasteCategory){
+        wasteRespostory.save(wasteCategory);
     }
 
 
