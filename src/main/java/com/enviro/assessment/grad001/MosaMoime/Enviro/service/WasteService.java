@@ -41,7 +41,11 @@ public class WasteService {
     }
 
     public void updateWasteServiceCategory(Integer id, WasteCategory wasteCategory){
-        wasteRespostory.save(wasteCategory);
+        WasteCategory newWasteCate = wasteRespostory.findById(id).orElseThrow(IndexOutOfBoundsException::new);
+        newWasteCate.setCategory(wasteCategory.getCategory());
+        newWasteCate.setDescription(wasteCategory.getDescription());
+        newWasteCate.setCategoryType(wasteCategory.getCategoryType());
+        wasteRespostory.save(newWasteCate);
     }
 
 
