@@ -1,33 +1,35 @@
 package com.enviro.assessment.grad001.MosaMoime.Enviro.model;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 
-@Table("Enviro")
+@Table("ENVIRO")
 public class WasteCategory {
+
     @Id
     private int id;
 
-    @NotEmpty
+    @NotEmpty(message = "Category must not be empty")
+    @Size(max = 255, message = "Category must not exceed 255 characters")
     private String category;
-    @NotEmpty
+
+    @NotEmpty(message = "Description must not be empty")
+    @Size(max = 255, message = "Description must not exceed 255 characters")
     private String description;
-    @NotEmpty
+
+    @Size(max = 255, message = "Category type must not exceed 255 characters")
     private String categoryType;
+
 
 
 
     public WasteCategory() {
     }
 
-    public WasteCategory(int id, String category, String description, String categoryType) {
-        this.id = id;
-        this.category = category;
-        this.description = description;
-        this.categoryType = categoryType;
-    }
+
 
 
     public WasteCategory (String category, String description, String categoryType){

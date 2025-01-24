@@ -3,8 +3,6 @@ package com.enviro.assessment.grad001.MosaMoime.Enviro.controller;
 import com.enviro.assessment.grad001.MosaMoime.Enviro.model.WasteCategory;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * Interface for Waste Category Controller.
  * Provides endpoints for managing waste categories.
@@ -19,7 +17,7 @@ public interface IController {
      * @return List of WasteCategory
      */
     @GetMapping("")
-    public List<WasteCategory> getWasteCategories();
+    public Iterable<WasteCategory> getWasteCategories();
 
     /**
      * endpoint to get a specific waste category by ID.
@@ -27,14 +25,14 @@ public interface IController {
      * @return WasteCategory
      */
     @GetMapping("/{id}")
-    public WasteCategory getWasteCategory(@PathVariable String id);
+    public WasteCategory getWasteCategory(@PathVariable Integer id);
 
     /**
      * endpoint to delete a specific waste category by ID.
      * @param id The ID of the waste category
      */
     @DeleteMapping("/{id}")
-    public void deleteWasteCategory(@PathVariable String id);
+    public void deleteWasteCategory(@PathVariable Integer id);
 
     /**
      * endpoint to add a new waste category.
@@ -49,5 +47,5 @@ public interface IController {
      * @param wasteCategory The updated waste category
      */
     @PutMapping("/{id}")
-    public void updateWasteCategory(@PathVariable String id, @RequestBody WasteCategory wasteCategory);
+    public void updateWasteCategory(@PathVariable Integer id, @RequestBody WasteCategory wasteCategory);
 }

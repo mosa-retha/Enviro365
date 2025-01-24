@@ -6,8 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/disposal")
 public class DisposalController implements IController {
@@ -17,16 +15,19 @@ public class DisposalController implements IController {
     public DisposalController(WasteService wasteService){
         this.wasteService = wasteService;}
 
+    // endpoint to get all waste categories
     @GetMapping("")
     @Override
-    public List<WasteCategory> getWasteCategories(){
+    public Iterable<WasteCategory> getWasteCategories(){
         return wasteService.getWasteServiceCategories();
     }
+
+
     @GetMapping("/{id}")
     @Override
-    public WasteCategory getWasteCategory(@PathVariable String id){
+    public WasteCategory getWasteCategory(@PathVariable Integer id){
         try {
-            return wasteService.getWasteServiceCategory(Integer.parseInt(id));
+            return wasteService.getWasteServiceCategory(id);
         } catch (IndexOutOfBoundsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Waste category not found", e);
         }
@@ -35,9 +36,9 @@ public class DisposalController implements IController {
     // endpoint to delete a specific waste category
     @DeleteMapping("/{id}")
     @Override
-    public void deleteWasteCategory(@PathVariable String id){
+    public void deleteWasteCategory(@PathVariable Integer id){
         try {
-            wasteService.deleteWasteServiceCategory(Integer.parseInt(id));
+            wasteService.deleteWasteServiceCategory(id);
         } catch (IndexOutOfBoundsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Waste category not found", e);
         }
@@ -54,9 +55,9 @@ public class DisposalController implements IController {
 
     @PutMapping("/{id}")
     @Override
-    public void updateWasteCategory(@PathVariable String id, @RequestBody WasteCategory wasteCategory){
+    public void updateWasteCategory(@PathVariable Integer id, @RequestBody WasteCategory wasteCategory){
         try {
-            wasteService.updateWasteServiceCategory(Integer.parseInt(id), wasteCategory);
+            wasteService.updateWasteServiceCategory(id, wasteCategory);
         } catch (IndexOutOfBoundsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Waste category not found", e);
         }
