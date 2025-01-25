@@ -19,7 +19,7 @@ public class DisposalController implements IController {
     @GetMapping("")
     @Override
     public Iterable<WasteCategory> getWasteCategories(){
-        return wasteService.getWasteServiceCategories();
+        return wasteService.getWasteServiceCategories("disposal");
     }
 
 
@@ -27,7 +27,7 @@ public class DisposalController implements IController {
     @Override
     public WasteCategory getWasteCategory(@PathVariable Integer id){
         try {
-            return wasteService.getWasteServiceCategory(id);
+            return wasteService.getWasteServiceCategory(id, "disposal");
         } catch (IndexOutOfBoundsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Waste category not found", e);
         }
@@ -38,7 +38,7 @@ public class DisposalController implements IController {
     @Override
     public void deleteWasteCategory(@PathVariable Integer id){
         try {
-            wasteService.deleteWasteServiceCategory(id);
+            wasteService.deleteWasteServiceCategory(id, "disposal");
         } catch (IndexOutOfBoundsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Waste category not found", e);
         }

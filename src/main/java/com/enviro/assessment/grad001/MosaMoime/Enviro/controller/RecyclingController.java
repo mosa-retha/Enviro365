@@ -17,21 +17,20 @@ public class RecyclingController implements IController{
     @GetMapping("")
     @Override
     public Iterable<WasteCategory> getWasteCategories() {
+        return wasteService.getWasteServiceCategories("recycling");
 
-        System.out.println(wasteService.getWasteServiceCategories());
-        return wasteService.getWasteServiceCategories();
     }
 
     @GetMapping("/{id}")
     @Override
     public WasteCategory getWasteCategory(@PathVariable Integer id) {
-        return wasteService.getWasteServiceCategory(id);
+        return wasteService.getWasteServiceCategory(id, "recycling");
     }
 
     @DeleteMapping("/{id}")
     @Override
     public void deleteWasteCategory(@PathVariable Integer id) {
-        wasteService.deleteWasteServiceCategory(id);
+        wasteService.deleteWasteServiceCategory(id, "recycling");
     }
 
     @PostMapping("")
